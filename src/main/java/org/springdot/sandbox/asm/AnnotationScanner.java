@@ -13,6 +13,26 @@ import java.io.FileInputStream;
 
 public class AnnotationScanner extends ClassVisitor{
 
+    static class FieldAnnotationScanner extends FieldVisitor{
+        FieldAnnotationScanner(){ super(Opcodes.ASM4); }
+
+        @Override
+        public AnnotationVisitor visitAnnotation(String desc, boolean visible){
+            System.out.println("visitAnnotation: desc="+desc+" visible="+visible);
+            return super.visitAnnotation(desc, visible);
+        }
+    }
+
+    static class MethodAnnotationScanner extends MethodVisitor{
+        MethodAnnotationScanner(){ super(Opcodes.ASM4); }
+
+        @Override
+        public AnnotationVisitor visitAnnotation(String desc, boolean visible){
+            System.out.println("visitAnnotation: desc="+desc+" visible="+visible);
+            return super.visitAnnotation(desc, visible);
+        }
+    }
+
     public AnnotationScanner(int api){
         super(api);
     }
@@ -32,13 +52,13 @@ public class AnnotationScanner extends ClassVisitor{
     @Override
     public FieldVisitor visitField(int access, String name, String desc, String signature, Object value){
         System.out.println("visitField: access="+access+" name="+name+" desc="+desc+" signature="+signature+" value="+value);
-        return super.visitField(access,name,desc,signature,value);
+        return new FieldAnnotationScanner();
     }
 
     @Override
     public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions){
         System.out.println("visitMethod: access="+access+" name="+name+" desc="+desc+" signature="+signature+" exceptions="+exceptions);
-        return super.visitMethod(access,name,desc,signature,exceptions);
+        return new MethodAnnotationScanner();
     }
 
     public static void main(String[] args) throws Exception{

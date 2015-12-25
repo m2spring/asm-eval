@@ -10,8 +10,17 @@ $ mvn clean package
 
 ```
 $ ./run.sh
+
 visitAnnotation: desc=Lorg/springdot/sandbox/asm/MyClass; visible=true
+A.visitEnum: name=number desc=Lorg/springdot/sandbox/asm/MyEnum; value=TWO
+Ar.visit: value=abc
+Ar.visit: value=def
+
 visitField: access=1 name=aStringField desc=Ljava/lang/String; signature=null value=null
+F.visitAnnotation: desc=Lorg/springdot/sandbox/asm/MyField; visible=true
+
 visitMethod: access=1 name=<init> desc=()V signature=null exceptions=null
+
 visitMethod: access=1 name=aMethod desc=()V signature=null exceptions=null
+M.visitAnnotation: desc=Lorg/springdot/sandbox/asm/MyMethod; visible=true
 ```
