@@ -18,7 +18,7 @@ public class AnnotationScanner extends ClassVisitor{
 
         @Override
         public AnnotationVisitor visitAnnotation(String desc, boolean visible){
-            System.out.println("visitAnnotation: desc="+desc+" visible="+visible);
+            System.out.println("visitAnnotation: desc="+desc);
             return super.visitAnnotation(desc, visible);
         }
     }
@@ -28,7 +28,7 @@ public class AnnotationScanner extends ClassVisitor{
 
         @Override
         public AnnotationVisitor visitAnnotation(String desc, boolean visible){
-            System.out.println("visitAnnotation: desc="+desc+" visible="+visible);
+            System.out.println("visitAnnotation: desc="+desc);
             return super.visitAnnotation(desc, visible);
         }
     }
@@ -39,25 +39,19 @@ public class AnnotationScanner extends ClassVisitor{
 
     @Override
     public AnnotationVisitor visitAnnotation(String desc, boolean visible){
-        System.out.println("visitAnnotation: desc="+desc+" visible="+visible);
+        System.out.println("visitAnnotation: desc="+desc);
         return super.visitAnnotation(desc,visible);
     }
 
     @Override
-    public void visitAttribute(Attribute attr){
-        System.out.println("visitAttribute: attr="+attr);
-        super.visitAttribute(attr);
-    }
-
-    @Override
     public FieldVisitor visitField(int access, String name, String desc, String signature, Object value){
-        System.out.println("visitField: access="+access+" name="+name+" desc="+desc+" signature="+signature+" value="+value);
+        System.out.println("\nvisitField: name="+name+" desc="+desc);
         return new FieldAnnotationScanner();
     }
 
     @Override
     public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions){
-        System.out.println("visitMethod: access="+access+" name="+name+" desc="+desc+" signature="+signature+" exceptions="+exceptions);
+        System.out.println("\nvisitMethod: name="+name+" desc="+desc);
         return new MethodAnnotationScanner();
     }
 
