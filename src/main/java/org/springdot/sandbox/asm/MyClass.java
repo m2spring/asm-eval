@@ -11,4 +11,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface MyClass{
     String name() default "";
+    MyEnum number() default MyEnum.ZERO;
+    String[] values() default {};
 }
